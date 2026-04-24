@@ -1,71 +1,52 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#projects", label: "Projects" },
-    { href: "#about", label: "About" },
-    { href: "#blog", label: "Blog" },
-    { href: "#contact", label: "Contact" },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Projects", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link
-            href="#home"
-            className="text-2xl font-bold text-gray-900 dark:text-white"
-          >
-            Portfolio
-          </Link>
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="fixed top-0 left-0 right-0 z-40 glassmorphism border-b border-cyan-400/10"
+    >
+      <div className="section-container flex justify-between items-center">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="text-2xl font-bold gradient-text text-glow"
+        >
+          KMJ
+        </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Navigation */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col gap-1"
-            suppressHydrationWarning
-          >
-            <span className="w-6 h-0.5 bg-gray-900 dark:bg-white"></span>
-            <span className="w-6 h-0.5 bg-gray-900 dark:bg-white"></span>
-            <span className="w-6 h-0.5 bg-gray-900 dark:bg-white"></span>
-          </button>
+        <div className="hidden md:flex gap-8">
+          {navItems.map((item) => (
+            <motion.a
+              key={item.name}
+              href={item.href}
+              whileHover={{ color: "#00d4ff", textShadow: "0 0 10px rgba(0, 212, 255, 0.8)" }}
+              className="text-sm text-gray-300 hover:text-cyan-400 transition-colors"
+            >
+              {item.name}
+            </motion.a>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden pb-4 border-t border-gray-200 dark:border-gray-800">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        )}
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          href="mailto:krishna987170@gmail.com"
+          className="hidden sm:block px-6 py-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-dark font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all"
+        >
+          Get in Touch
+        </motion.a>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

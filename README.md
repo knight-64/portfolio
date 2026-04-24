@@ -1,36 +1,205 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Krishna Murari Jha - Portfolio
 
-## Getting Started
+A visually stunning, modern portfolio website built with cutting-edge web technologies. Features interactive animations, particle effects, and a responsive design optimized for all devices.
 
-First, run the development server:
+## 🎨 Features
+
+- **Animated Particle Background** - Interactive particle system that responds to mouse movement
+- **Cursor Glow Effect** - Beautiful glowing effect that follows your cursor
+- **Smooth Section Animations** - Reveal animations as you scroll through sections
+- **Interactive Project Showcase** - Engaging cards with hover effects and detailed project information
+- **Responsive Design** - Fully optimized for desktop, tablet, and mobile devices
+- **Accessibility** - WCAG compliant with proper semantic HTML and ARIA labels
+- **Performance Optimized** - Fast loading times with optimized images and code splitting
+- **Dark Mode** - Modern dark theme with cyan and blue gradients
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 16 with React 19
+- **Styling**: Tailwind CSS 4 with custom animations
+- **Animations**: Framer Motion for smooth, performant animations
+- **3D**: Three.js for potential 3D elements
+- **Language**: TypeScript for type safety
+- **Intersection Observer**: react-intersection-observer for scroll animations
+
+## 📦 Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to project directory
+cd portfolio_krsna
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to see your portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Sections
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Hero
+- Eye-catching introduction with animated background elements
+- Call-to-action buttons
+- Contact information
 
-## Learn More
+### About
+- Personal bio and professional summary
+- Education details
+- Contact information
 
-To learn more about Next.js, take a look at the following resources:
+### Projects
+- Featured AI Interviewer project with detailed description
+- Technology tags
+- Project highlights
+- Project duration
+- Interactive hover effects
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Skills
+- Programming languages (Java, JavaScript, Python, TypeScript, SQL)
+- Frontend development skills
+- Backend development expertise
+- Core competencies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Contact
+- Contact form with email notification
+- Direct contact information
+- Location details
+- Availability indicators
 
-## Deploy on Vercel
+### Additional
+- Navigation bar with smooth scrolling
+- Particle background with mouse tracking
+- Cursor glow effect
+- Footer with copyright and build information
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Colors
+Edit the color scheme in `tailwind.config.ts`:
+
+```ts
+colors: {
+  primary: "#00d4ff",    // Cyan
+  secondary: "#00ffaa",  // Green
+  accent: "#ff00ff",     // Magenta
+}
+```
+
+### Content
+Update component files in `/components` directory:
+- `Hero.tsx` - Main introduction
+- `About.tsx` - About section
+- `Projects.tsx` - Project showcase
+- `Skills.tsx` - Skills listing
+- `Contact.tsx` - Contact form
+
+### Animations
+Framer Motion animations are configured throughout components with `variants`. Adjust timing and easing in component files.
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+## ⚡ Performance
+
+- **Lighthouse Score**: Optimized for 90+ scores
+- **Core Web Vitals**: Optimized for good performance
+- **Bundle Size**: Optimized with code splitting
+- **Image Optimization**: Next.js automatic image optimization
+- **CSS**: Tailwind CSS purging unused styles
+
+## ♿ Accessibility
+
+- **Semantic HTML**: Proper heading hierarchy and semantic elements
+- **ARIA Labels**: Screen reader friendly navigation
+- **Keyboard Navigation**: Fully keyboard accessible
+- **Color Contrast**: WCAG AA compliant contrast ratios
+- **Focus Indicators**: Visible focus states for keyboard users
+
+## 🔐 Security
+
+- **No external scripts**: Only essential dependencies
+- **Content Security**: TypeScript for type safety
+- **Form handling**: Client-side form validation
+- **Email**: Configured with proper email validation
+
+## 📊 File Structure
+
+```
+portfolio_krsna/
+├── app/
+│   ├── layout.tsx           # Root layout
+│   ├── page.tsx             # Main page
+│   └── globals.css          # Global styles
+├── components/
+│   ├── Navigation.tsx       # Navigation bar
+│   ├── Hero.tsx             # Hero section
+│   ├── About.tsx            # About section
+│   ├── Projects.tsx         # Projects section
+│   ├── Skills.tsx           # Skills section
+│   ├── Contact.tsx          # Contact form
+│   ├── Blog.tsx             # Blog section
+│   ├── Footer.tsx           # Footer
+│   ├── ParticleBackground.tsx # Particle effect
+│   └── CursorGlow.tsx       # Cursor glow effect
+├── lib/
+│   └── hooks.ts             # Custom React hooks
+├── public/                  # Static assets
+├── package.json             # Dependencies
+├── tsconfig.json            # TypeScript config
+├── tailwind.config.ts       # Tailwind config
+├── next.config.ts           # Next.js config
+└── postcss.config.mjs       # PostCSS config
+```
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+```bash
+# Push to GitHub
+git push origin main
+
+# Connect to Vercel
+# Dashboard → New Project → Select repository
+# Deploy automatically on push
+```
+
+### Other Platforms
+- **Netlify**: Supports Next.js with similar setup
+- **AWS Amplify**: AWS hosting with CI/CD
+- **Self-hosted**: `npm run build && npm start`
+
+## 📄 License
+
+This portfolio is open source and available under the MIT License.
+
+## 👨‍💻 Author
+
+**Krishna Murari Jha**
+- Email: krishna987170@gmail.com
+- Location: Greater Noida, India
+- Phone: +91 9871701091
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org)
+- Styled with [Tailwind CSS](https://tailwindcss.com)
+- Animated with [Framer Motion](https://www.framer.com/motion)
+- 3D with [Three.js](https://threejs.org)
+
+---
+
+**Last Updated**: April 24, 2026

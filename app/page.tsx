@@ -1,21 +1,34 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
-import Blog from "@/components/Blog";
+import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
+import ParticleBackground from "@/components/ParticleBackground";
+import CursorGlow from "@/components/CursorGlow";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <Navigation />
-      <Hero />
-      <Projects />
-      <About />
-      <Blog />
-      <Contact />
-      <Footer />
-    </div>
+    <main className="min-h-screen bg-dark text-white relative">
+      {/* Background effects */}
+      <ParticleBackground />
+      <CursorGlow />
+
+      {/* Content */}
+      <div className="relative z-10">
+        <Navigation />
+        <Hero />
+        <Projects />
+        <About />
+        <Skills />
+        <Contact />
+        <Blog />
+        <Footer />
+      </div>
+    </main>
   );
 }

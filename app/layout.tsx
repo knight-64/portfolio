@@ -13,8 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio - Software Developer",
-  description: "Showcasing my projects, skills, and experience as a software developer",
+  title: "Krishna Murari Jha - Full Stack Developer",
+  description:
+    "Portfolio showcasing innovative software development projects, technical expertise, and professional experience. 3D interactive showcase with modern web technologies.",
+  keywords: [
+    "developer",
+    "full-stack",
+    "portfolio",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Java",
+    "JavaScript",
+  ],
+  authors: [{ name: "Krishna Murari Jha" }],
+  creator: "Krishna Murari Jha",
 };
 
 export default function RootLayout({
@@ -23,11 +36,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <meta name="theme-color" content="#0a0a0a" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300d4ff'>K</text></svg>" />
+      </head>
+      <body className="bg-dark text-white antialiased overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }

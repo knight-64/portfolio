@@ -1,124 +1,173 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useState, FormEvent, ChangeEvent } from "react";
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Contact() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
-    // Simulate form submission
-    // In production, you'd send this to an API endpoint
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
+    // In a real app, you'd send this data to a backend
+    console.log("Form submitted:", formData);
     setSubmitted(true);
-    setLoading(false);
-    (e.target as HTMLFormElement).reset();
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: "", email: "", message: "" });
+    }, 3000);
+  };
 
-    // Reset success message after 3 seconds
-    setTimeout(() => setSubmitted(false), 3000);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white text-center">
-          Get In Touch
-        </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 mb-12 text-lg">
-          Have a project in mind? Let's talk!
-        </p>
+    <section
+      id="contact"
+      ref={ref}
+      className="relative py-20 border-t border-cyan-400/10"
+    >
+      <div className="section-container">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold mb-12">
+            <span className="gradient-text">Let's Connect</span>
+          </motion.h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
-          <div suppressHydrationWarning>
-            <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Your name"
-              suppressHydrationWarning
-            />
-          </div>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <motion.div variants={itemVariants} className="space-y-8">
+              <div className="glow-card">
+                <h3 className="text-cyan-400 font-semibold text-lg mb-2">Email</h3>
+                <a
+                  href="mailto:krishna987170@gmail.com"
+                  className="text-gray-300 hover:text-cyan-400 transition-colors break-all"
+                >
+                  krishna987170@gmail.com
+                </a>
+              </div>
 
-          <div suppressHydrationWarning>
-            <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="your@email.com"
-              suppressHydrationWarning
-            />
-          </div>
+              <div className="glow-card">
+                <h3 className="text-cyan-400 font-semibold text-lg mb-2">Phone</h3>
+                <p className="text-gray-300">+91 9871701091</p>
+              </div>
 
-          <div suppressHydrationWarning>
-            <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-              Message
-            </label>
-            <textarea
-              required
-              rows={5}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-              placeholder="Tell me about your project..."
-              suppressHydrationWarning
-            />
-          </div>
+              <div className="glow-card">
+                <h3 className="text-cyan-400 font-semibold text-lg mb-2">Location</h3>
+                <p className="text-gray-300">Greater Noida, India</p>
+              </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-semibold rounded-lg transition-colors"
-            suppressHydrationWarning
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
+              <div className="glow-card">
+                <h3 className="text-cyan-400 font-semibold text-lg mb-4">Available For</h3>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                    Full-time opportunities
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                    Freelance projects
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                    Technical discussions
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
 
-          {submitted && (
-            <div className="p-4 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-lg text-center">
-              Thanks for your message! I'll get back to you soon.
-            </div>
-          )}
-        </form>
-
-        <div className="mt-12 pt-12 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-6">
-            Or reach out directly:
-          </p>
-          <div className="flex justify-center gap-6">
-            <a
-              href="mailto:your@email.com"
-              className="text-blue-500 hover:text-blue-600 font-semibold"
+            <motion.form
+              variants={itemVariants}
+              onSubmit={handleSubmit}
+              className="glow-card space-y-6"
             >
-              Email
-            </a>
-            <a
-              href="#"
-              className="text-blue-500 hover:text-blue-600 font-semibold"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="#"
-              className="text-blue-500 hover:text-blue-600 font-semibold"
-            >
-              GitHub
-            </a>
-            <a
-              href="#"
-              className="text-blue-500 hover:text-blue-600 font-semibold"
-            >
-              Twitter
-            </a>
+              {submitted && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400"
+                >
+                  ✓ Message sent successfully! I'll get back to you soon.
+                </motion.div>
+              )}
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg bg-slate-800/50 border border-cyan-400/20 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none transition-colors"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg bg-slate-800/50 border border-cyan-400/20 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none transition-colors"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-lg bg-slate-800/50 border border-cyan-400/20 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none transition-colors resize-none"
+                  placeholder="Tell me about your project..."
+                  required
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="submit"
+                className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-dark font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all"
+              >
+                Send Message
+              </motion.button>
+            </motion.form>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
