@@ -23,7 +23,6 @@
       "react/canary",
       "react-dom/canary"
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"

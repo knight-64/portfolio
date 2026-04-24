@@ -2,11 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
 
 export default function Projects() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [activeProject, setActiveProject] = useState(0);
 
   const projects = [
     {
@@ -80,12 +78,11 @@ export default function Projects() {
           </motion.p>
 
           <div className="grid gap-8">
-            {projects.map((project, idx) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                onHoverStart={() => setActiveProject(idx)}
                 className={`group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-500`}
               >
                 <div
