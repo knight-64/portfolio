@@ -86,25 +86,26 @@ export default function Projects() {
                 className={`group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-500`}
               >
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0`}
                 />
 
-                <div className="glow-card relative">
+                <div className="glow-card relative z-10">
                   <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                      <div className="flex items-start gap-3 mb-3">
+                      <div className="flex items-start gap-3 mb-3 flex-wrap">
                         <h3 className="text-2xl font-bold text-cyan-400">
                           {project.title}
                         </h3>
                         {project.tags && project.tags.length > 0 && (
                           <div className="flex gap-2">
                             {project.tags.map((tag) => (
-                              <span
+                              <motion.span
                                 key={tag}
-                                className="px-2 py-1 rounded-full text-xs font-bold bg-cyan-500 text-dark"
+                                whileHover={{ scale: 1.05 }}
+                                className="px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-dark"
                               >
                                 {tag}
-                              </span>
+                              </motion.span>
                             ))}
                           </div>
                         )}
@@ -119,7 +120,7 @@ export default function Projects() {
                         <ul className="space-y-2">
                           {project.highlights.map((highlight, i) => (
                             <li key={i} className="flex items-start gap-2 text-gray-300">
-                              <span className="text-cyan-400 mt-1">▸</span>
+                              <span className="text-cyan-400 mt-1 text-lg">▸</span>
                               <span>{highlight}</span>
                             </li>
                           ))}
@@ -128,21 +129,25 @@ export default function Projects() {
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.map((tech) => (
-                          <span
+                          <motion.span
                             key={tech}
-                            className="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 hover:bg-cyan-400/20 transition-colors"
+                            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 212, 255, 0.5)" }}
+                            className="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 hover:bg-cyan-400/20 transition-colors cursor-pointer"
                           >
                             {tech}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
                     </div>
 
                     <div className="md:col-span-1 flex flex-col justify-between gap-4">
-                      <div className="glow-card bg-gradient-to-br from-slate-800 to-slate-900">
-                        <p className="text-gray-400 text-sm mb-2">Duration</p>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        className="glow-card bg-gradient-to-br from-slate-800 to-slate-900"
+                      >
+                        <p className="text-gray-400 text-sm mb-2 font-medium">Duration</p>
                         <p className="text-white font-semibold">{project.duration}</p>
-                      </div>
+                      </motion.div>
 
                       <motion.a
                         whileHover={{ scale: 1.05 }}
@@ -150,7 +155,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-dark font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all text-center"
+                        className="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-dark font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all text-center"
                       >
                         View on GitHub
                       </motion.a>
@@ -186,4 +191,5 @@ export default function Projects() {
     </section>
   );
 }
+
 
