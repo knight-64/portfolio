@@ -23,9 +23,6 @@ export default function Footer() {
             <a href="mailto:krishna987170@gmail.com" className="hover:text-cyan-400 transition-colors">
               Email
             </a>
-            <a href="tel:+919871701091" className="hover:text-cyan-400 transition-colors">
-              Phone
-            </a>
             <a href="#projects" className="hover:text-cyan-400 transition-colors">
               Projects
             </a>

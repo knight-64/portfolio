@@ -65,7 +65,6 @@ export default function About() {
               <div className="glow-card">
                 <h3 className="text-cyan-400 font-semibold mb-2">Contact</h3>
                 <p className="text-gray-300">krishna987170@gmail.com</p>
-                <p className="text-gray-300">+91 9871701091</p>
               </div>
             </motion.div>
           </div>

@@ -191,7 +191,6 @@ This portfolio is open source and available under the MIT License.
 **Krishna Murari Jha**
 - Email: krishna987170@gmail.com
 - Location: Greater Noida, India
-- Phone: +91 9871701091
 
 ## 🙏 Acknowledgments
 

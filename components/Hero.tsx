@@ -94,8 +94,6 @@ export default function Hero() {
           </a>
           <span>•</span>
           <span>Greater Noida</span>
-          <span>•</span>
-          <span>+91 9871701091</span>
         </motion.div>
       </motion.div>
 

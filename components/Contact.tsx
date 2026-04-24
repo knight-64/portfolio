@@ -149,7 +149,7 @@ export default function Contact() {
 
               <div className="glow-card hover:scale-105 transition-transform duration-300">
                 <h3 className="text-cyan-400 font-semibold text-lg mb-2">Phone</h3>
-                <p className="text-gray-300">+91 9871701091</p>
+                <p className="text-gray-300">Available on request</p>
               </div>
 
               <div className="glow-card hover:scale-105 transition-transform duration-300">
