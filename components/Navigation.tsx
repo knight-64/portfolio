@@ -7,6 +7,7 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const navItems = [
     { name: "Home", href: "#home", id: "home" },
@@ -17,6 +18,8 @@ export default function Navigation() {
   ];
 
   useEffect(() => {
+    setMounted(true);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
@@ -31,6 +34,7 @@ export default function Navigation() {
           const rect = section.element.getBoundingClientRect();
           if (rect.top <= 100 && rect.bottom > 0) {
             setActiveSection(section.id);
+            break;
           }
         }
       }
@@ -44,11 +48,13 @@ export default function Navigation() {
     setIsOpen(false);
   };
 
+  // Render with suppressHydrationWarning on the nav element to avoid hydration mismatch
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
+      suppressHydrationWarning
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
           ? "glassmorphism border-b border-cyan-400/10 backdrop-blur-md"
@@ -72,7 +78,7 @@ export default function Navigation() {
               href={item.href}
               whileHover={{ color: "#00d4ff" }}
               className={`text-sm font-medium transition-all duration-300 ${
-                activeSection === item.id
+                mounted && activeSection === item.id
                   ? "text-cyan-400 border-b-2 border-cyan-400 pb-1"
                   : "text-gray-300 hover:text-cyan-400"
               }`}
@@ -146,7 +152,7 @@ export default function Navigation() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
                     className={`px-4 py-3 rounded-lg font-medium transition-all ${
-                      activeSection === item.id
+                      mounted && activeSection === item.id
                         ? "bg-cyan-400/20 text-cyan-400 border-l-2 border-cyan-400"
                         : "text-gray-300 hover:bg-cyan-400/10 hover:text-cyan-400"
                     }`}
